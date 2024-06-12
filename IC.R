@@ -121,33 +121,22 @@ PLOTLIST<-function(datalist,plottitle,colnumber,yaxis){
   return(Plots)
   
 }
+
+
+# Liste mit den Plots für beide Standorte, Standort A und Standort B
+# Eingabeargumente sind eine Datalist aus CSVTOGGPLOT, der Titel des Plots, die Anzahl der Spalten der Grafiken und die Y-Achsenbeschriftung
+PLOTSINGLE<-function(dataframe,plottitle,colnumber,yaxis){
+  Plots<-GENERALPLOT(datalist[[1]],plottitle,colnumber, yaxis, "2022")
+  return(Plots)
+}
+
 # Speichert die Plots als PNG mit dem Präfix PLOTNAME
-SAVEPLOTS<-function(plotlist,Plotname){
+SAVEPLOTLIST<-function(plotlist,Plotname){
   ggsave(paste0(Plotname, "_All.png"), plot = plotlist[[1]], width = 8 , height = 7)
   ggsave(paste0(Plotname, "_LocA.png"), plot = plotlist[[2]], width = 8 , height = 7)
   ggsave(paste0(Plotname, "_LocB.png"), plot = plotlist[[3]], width = 8 , height = 7)
 }
-
-
-setwd("C:/Users/Robin Burgold/tubCloud/shared1/Grafiken/All/IC/Neu")
-
-#2022
-ICOW22 <- (read.table("22_IC_OW.csv", header=TRUE, dec=",", sep=";"))
-ICPW22 <- (read.table("22_IC_PW.csv", header=TRUE, dec=",", sep=";"))
-ICTW22 <- (read.table("22_IC_TW.csv", header=TRUE, dec=",", sep=";"))
-NHOW22 <- (read.table("22_NH4_OW.csv", header=TRUE, dec=",", sep=";"))
-NHPW22 <- (read.table("22_NH4_OW.csv", header=TRUE, dec=",", sep=";"))
-NHTW22 <- (read.table("22_NH4_TW.csv", header=TRUE, dec=",", sep=";"))
-
-#2021
-IC21 <- (read.table("21_PW.csv", header=TRUE, dec=",", sep=";"))
-ICPW21<-IC21[ICPW21[,4]=="PW",]
-ICTW21<-IC21[ICPW21[,4]=="TW",]
-
-
-ICOW22Data<-CSVTOGGPLOT(ICOW22)
-ICOW22Data[[1]][,2]
-
-ICOWNO2.N22Data<-ICOW22Data[[1]][ICOW22Data[[1]][,2]=="NO2.N",]
-
-       
+# Speichert die Plots als PNG mit dem Präfix PLOTNAME
+SAVEPLOTSINGLE<-function(plot,Plotname){
+  ggsave(paste0(Plotname, "_All.png"), plot = plotlist[[1]], width = 8 , height = 7)
+}
